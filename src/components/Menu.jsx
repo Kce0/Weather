@@ -32,7 +32,6 @@ function Menu() {
               <TextField
                 sx={{
                   width: "500px",
-
                   fontSize: "18px",
                   backgroundColor: "rgba(0,0,0,0.5)",
                   borderRadius: "25px",
@@ -42,7 +41,7 @@ function Menu() {
                     color: "white",
                   },
                   "& .MuiOutlinedInput-root": {
-                    borderRadius: "25px", // 테두리 둥글기 설정
+                    borderRadius: "25px",
                   },
                 }}
                 id="outlined-basic"

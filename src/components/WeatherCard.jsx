@@ -4,47 +4,63 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
-// weathers props는 검색결과를 가져옴
-function weatherCard({ weathers, locationName }) {
+function WeatherCard({ weathers, locationName, temp }) {
   return (
-    <Grid container spacing={2.5}>
+    <>
       {weathers.map((weather) => (
-        // size = 12/5 하나의 행에 5개의 grid를 보여줌
-        <Grid size={2.4} key={weather.id}>
-          <Card sx={{ maxWidth: 345 }}>
-            <CardMedia
-              sx={{ height: 400 }}
-              image={
-                weather.poster_path
-                  ? `https://openweathermap.org/img/wn/${weather.icon}.png`
-                  : "/images/poster.png"
-              }
-              title={locationName}
-            />
+        <Grid key={weather.id} sx={{ width: "1200px" }}>
+          <Card
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              marginTop: "180px",
+              justifyContent: "space-between",
+              alignItems: "center",
+              backgroundColor: "rgba(84,103,119,0.8)",
+              borderRadius: "10px",
+              padding: "0 100px",
+            }}
+          >
             <CardContent>
               <Typography
-                gutterBottom
                 variant="h5"
                 component="div"
                 sx={{
-                  fontSize: 17,
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  width: "200px",
+                  fontSize: "25px",
+                  color: "white",
+                  marginBottom: "20px",
                 }}
               >
-                {locationName}
+                <p>{locationName}</p>
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                {weather.description}
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{
+                  fontSize: "40px",
+                  fontWeight: "bold",
+                  color: "white",
+                }}
+              >
+                <p>{weather.description}</p>
               </Typography>
+              <p
+                style={{ fontSize: "30px", fontWeight: "bold", color: "white" }}
+              >
+                최고 {temp.temp_max}° 최저 {temp.temp_min}°
+              </p>
             </CardContent>
+            <CardMedia
+              component="img"
+              sx={{ width: 250, height: 250 }}
+              image={`https://openweathermap.org/img/wn/${weather.icon}@4x.png`}
+              title={locationName}
+            />
           </Card>
         </Grid>
       ))}
-    </Grid>
+    </>
   );
 }
 
-export default weatherCard;
+export default WeatherCard;

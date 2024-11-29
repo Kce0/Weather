@@ -54,6 +54,7 @@ function SearchResults() {
           <WeatherCard
             weathers={searchResults.weather}
             locationName={searchResults.name}
+            temp={searchResults.main}
           />
         ) : (
           <h2>검색 결과가 없습니다.</h2>

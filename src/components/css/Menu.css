@@ -30,8 +30,8 @@ header {
   .Menu {
     position: fixed;
     width: 100%;
-    background-color: rgba(180, 180, 180, 0.5);
-    height: 60px;
+    background-color: rgba(221, 221, 221, 0.5);
+    height: 50px;
     top: 90px;
     z-index: 99999;
   }
@@ -40,5 +40,19 @@ header {
     display: flex;
     justify-content: space-around;
     align-items: center;
+  }
+
+  .Menu li {
+    width: 300px;
+  }
+
+  .Menu li a {
+    color: rgb(78, 78, 78);
+    font-weight: 700;
+  }
+
+  .Menu li a:hover {
+    background-color: rgb(97, 99, 121);
+    color: white;
   }
 }
