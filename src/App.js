@@ -11,7 +11,8 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/detail/:weatherId" element={<Detail />} />
       <Route path="/location" element={<WeatherCategory />} />
-      <Route path="/5day" element={<WeatherCategory />} />
+      <Route path="/today" element={<WeatherCategory category="today" />} />
+      <Route path="/5day" element={<WeatherCategory category="5day" />} />
       <Route path="/search" element={<SearchResults />} />
       <Route path="/*" element={<NotFound />} />
     </Routes>

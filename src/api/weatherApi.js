@@ -19,7 +19,6 @@ export const searchWeather = async (query) => {
     lang: "kr",
   };
 
-  // API 요청 보내기
   const response = await weatherApi.get("/weather", { params });
   return response.data;
 };

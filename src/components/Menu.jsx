@@ -62,9 +62,7 @@ function Menu() {
           <li>
             <NavLink to="/today">오늘 날씨</NavLink>
           </li>
-          <li>
-            <NavLink to="/location">지역 날씨</NavLink>
-          </li>
+
           <li>
             <NavLink to="/5day">5일간 날씨</NavLink>
           </li>

@@ -3,7 +3,7 @@ import "./css/Footer.css";
 function Footer() {
   return (
     <footer>
-      <p>Weather</p>
+      <p>This site was developed using openWeather.</p>
     </footer>
   );
 }
