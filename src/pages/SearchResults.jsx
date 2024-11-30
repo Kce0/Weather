@@ -8,6 +8,7 @@ import { Wrap, Main } from '../styles/StyledComponent'
 import Menu from '../components/Menu'
 import Footer from '../components/Footer'
 import WeatherCard from '../components/WeatherCard'
+import FiveDaySlider from '../components/Slider/FiveDaySlider'
 
 function SearchResults() {
    const [SearchParams] = useSearchParams()
@@ -42,7 +43,11 @@ function SearchResults() {
    return (
       <Wrap>
          <Menu />
-         <Main $padding="30px 0">{searchResults.weather && searchResults.weather.length > 0 ? <WeatherCard weathers={searchResults.weather} locationName={searchResults.name} temp={searchResults.main} /> : <h2>검색 결과가 없습니다.</h2>}</Main>
+         <Main $padding="30px 0">
+            {searchResults.weather && searchResults.weather.length > 0 ? <WeatherCard weathers={searchResults.weather} locationName={searchResults.name} temp={searchResults.main} /> : <h2>검색 결과가 없습니다.</h2>}
+            <FiveDaySlider />
+         </Main>
+
          <Footer />
       </Wrap>
    )

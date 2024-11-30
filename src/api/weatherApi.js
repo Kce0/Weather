@@ -10,7 +10,7 @@ const weatherApi = axios.create({
    },
 })
 
-// 날씨 검색 함수
+// 오늘 날씨 검색 함수
 export const searchWeather = async (query) => {
    const params = {
       q: query,
@@ -19,6 +19,18 @@ export const searchWeather = async (query) => {
       lang: 'kr',
    }
    const response = await weatherApi.get('/weather', { params })
+   return response
+}
+
+// 5일간 날씨 검색 함수
+export const searchFivedayWeather = async (query) => {
+   const params = {
+      q: query,
+      appid: AUTH_KEY,
+      units: 'metric',
+      lang: 'kr',
+   }
+   const response = await weatherApi.get('/forecast', { params })
    return response
 }
 

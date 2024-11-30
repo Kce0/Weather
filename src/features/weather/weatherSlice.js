@@ -1,9 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { searchWeather, getTodayWeather, get5dayWeather } from '../../api/weatherApi'
+import { searchWeather, searchFivedayWeather, getTodayWeather, get5dayWeather } from '../../api/weatherApi'
 
 // 날씨 검색을 위한 비동기 액션
 export const fetchSearchResults = createAsyncThunk('weather/fetchSearchResults', async ({ query }) => {
    const response = await searchWeather(query)
+   return response.data
+})
+
+// 5일간 날씨 검색을 위한 비동기 액션
+export const fetchFiveDaySearchResults = createAsyncThunk('weather/fetchFiveDaySearchResults', async ({ query }) => {
+   const response = await searchFivedayWeather(query)
    return response.data
 })
 
@@ -31,6 +37,7 @@ const weatherSlice = createSlice({
       loading: false,
       error: null,
       searchResults: {},
+      fivedaysearchResults: {},
       todayWeathers: {},
       // 날짜별 그룹화를 하기 위해서는 초기값이 null값이여야함
       fivedayWeathers: null,
@@ -51,6 +58,20 @@ const weatherSlice = createSlice({
             state.loading = false
             state.error = action.error.message
          })
+         // fetchFiveDaySearchResults
+         .addCase(fetchFiveDaySearchResults.pending, (state) => {
+            state.loading = true
+            state.error = null
+         })
+         .addCase(fetchFiveDaySearchResults.fulfilled, (state, action) => {
+            state.loading = false
+            state.fivedaysearchResults = action.payload
+         })
+         .addCase(fetchFiveDaySearchResults.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+         })
+
          // fetchTodayWeathers
          .addCase(fetchTodayWeathers.pending, (state) => {
             state.loading = true
