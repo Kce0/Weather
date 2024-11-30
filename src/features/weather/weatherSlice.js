@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { searchWeather, getTodayWeather } from '../../api/weatherApi'
+import { searchWeather, getTodayWeather, get5dayWeather } from '../../api/weatherApi'
 
 // 날씨 검색을 위한 비동기 액션
 export const fetchSearchResults = createAsyncThunk('weather/fetchSearchResults', async ({ query }) => {
@@ -7,9 +7,22 @@ export const fetchSearchResults = createAsyncThunk('weather/fetchSearchResults',
    return response.data
 })
 
+// 오늘날씨
 export const fetchTodayWeathers = createAsyncThunk('weather/fetchTodayWeathers', async ({ category }) => {
-   const reponse = await getTodayWeather(category)
-   return reponse.data
+   if (category === 'today') {
+      const reponse = await getTodayWeather(category)
+      return reponse.data
+   }
+   return null
+})
+
+// 5일간
+export const fetch5dayWeathers = createAsyncThunk('weather/fetch5dayWeathers', async ({ category }) => {
+   if (category === 'fiveday') {
+      const reponse = await get5dayWeather(category)
+      return reponse.data
+   }
+   return null
 })
 
 const weatherSlice = createSlice({
@@ -19,6 +32,7 @@ const weatherSlice = createSlice({
       error: null,
       searchResults: {},
       todayWeathers: {},
+      fivedayWeathers: {},
    },
    reducers: {},
    extraReducers: (builder) => {
@@ -46,6 +60,19 @@ const weatherSlice = createSlice({
             state.todayWeathers = action.payload
          })
          .addCase(fetchTodayWeathers.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+         })
+         //fetch5dayWeathers
+         .addCase(fetch5dayWeathers.pending, (state) => {
+            state.loading = true
+            state.error = null
+         })
+         .addCase(fetch5dayWeathers.fulfilled, (state, action) => {
+            state.loading = false
+            state.fivedayWeathers = action.payload
+         })
+         .addCase(fetch5dayWeathers.rejected, (state, action) => {
             state.loading = false
             state.error = action.error.message
          })

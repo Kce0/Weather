@@ -10,7 +10,7 @@ function App() {
          <Route path="/" element={<Home />} />
          <Route path="/location" element={<WeatherCategory />} />
          <Route path="/today" element={<WeatherCategory category="today" />} />
-         <Route path="/5day" element={<WeatherCategory category="5day" />} />
+         <Route path="/fiveday" element={<WeatherCategory category="fiveday" />} />
          <Route path="/search" element={<SearchResults />} />
          <Route path="/*" element={<NotFound />} />
       </Routes>

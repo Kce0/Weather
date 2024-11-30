@@ -4,16 +4,20 @@ import Menu from '../components/Menu'
 import Footer from '../components/Footer'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { fetchTodayWeathers } from '../features/weather/weatherSlice'
+import { fetchTodayWeathers, fetch5dayWeathers } from '../features/weather/weatherSlice'
 import WeatherCard from '../components/WeatherCard'
 
 function WeatherCategory({ category }) {
    const dispath = useDispatch()
-   const { todayWeathers, loading, error } = useSelector((state) => state.weathers)
+   const { fivedayWeathers, todayWeathers, loading, error } = useSelector((state) => state.weathers)
 
    useEffect(() => {
-      dispath(fetchTodayWeathers({ category }))
-   }, [dispath])
+      if (category === 'today') {
+         dispath(fetchTodayWeathers({ category }))
+      } else if (category === 'fiveday') {
+         dispath(fetch5dayWeathers({ category }))
+      }
+   }, [dispath, category])
 
    if (loading) {
       return (
@@ -34,12 +38,37 @@ function WeatherCategory({ category }) {
          </Wrap>
       )
    }
+   // 날짜별로 데이터를 그룹화 **공부**
+   const groupedByDate = fivedayWeathers.list.reduce((acc, day) => {
+      const date = day.dt_txt.split(' ')[0] // 날짜 부분만 추출 (YYYY-MM-DD 형식)
+      if (!acc[date]) {
+         acc[date] = day // 첫 번째 시간대의 데이터를 저장
+      }
+      return acc
+   }, {})
+
+   // 날짜별로 그룹화된 데이터의 값을 배열로 변환
+   const days = Object.values(groupedByDate)
 
    return (
       <Wrap>
          <Menu />
          <Main>
-            <WeatherCard weathers={todayWeathers.weather} locationName={todayWeathers.name} temp={todayWeathers.main} />
+            {category === 'today' ? (
+               <WeatherCard weathers={todayWeathers.weather} locationName={todayWeathers.name} temp={todayWeathers.main} />
+            ) : (
+               // ***공부***
+               days.slice(0, 9).map((day, index) => (
+                  <WeatherCard
+                     key={index}
+                     index={index}
+                     weathers={day.weather}
+                     locationName={fivedayWeathers.city.name}
+                     temp={day.main}
+                     day={day.dt_txt.split(' ')[0]} // 날짜만 전달 (YYYY-MM-DD)
+                  />
+               ))
+            )}
          </Main>
          <Footer />
       </Wrap>

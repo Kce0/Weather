@@ -4,7 +4,10 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 
-function WeatherCard({ weathers, locationName, temp }) {
+function WeatherCard({ weathers, locationName, temp, index, day }) {
+   if (!Array.isArray(weathers)) {
+      return <div>No weather data available.</div>
+   }
    return (
       <>
          {weathers.map((weather) => (
@@ -13,7 +16,7 @@ function WeatherCard({ weathers, locationName, temp }) {
                   sx={{
                      display: 'flex',
                      flexDirection: 'row',
-                     marginTop: '180px',
+                     marginTop: index === undefined || index === 0 ? '180px' : '40px',
                      justifyContent: 'space-between',
                      alignItems: 'center',
                      backgroundColor: 'rgba(84,103,119,0.8)',
@@ -47,6 +50,8 @@ function WeatherCard({ weathers, locationName, temp }) {
                      <p style={{ fontSize: '30px', fontWeight: 'bold', color: 'white' }}>
                         최고 {temp.temp_max}° 최저 {temp.temp_min}°
                      </p>
+
+                     {day ? <p style={{ color: 'white' }}>{day}</p> : null}
                   </CardContent>
                   <CardMedia component="img" sx={{ width: 250, height: 250 }} image={`https://openweathermap.org/img/wn/${weather.icon}@4x.png`} title={locationName} />
                </Card>

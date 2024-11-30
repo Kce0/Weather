@@ -36,5 +36,17 @@ export const getTodayWeather = async () => {
    return response
 }
 // 5일간 날씨
+// https://api.openweathermap.org/data/2.5/forecast?q=incheon&appid=내API키&units=metric&lang=kr
+export const get5dayWeather = async () => {
+   const response = await weatherApi.get('/forecast', {
+      params: {
+         q: 'incheon',
+         appid: AUTH_KEY,
+         units: 'metric',
+         lang: 'kr',
+      },
+   })
+   return response
+}
 
 export default weatherApi
