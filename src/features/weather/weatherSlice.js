@@ -32,7 +32,8 @@ const weatherSlice = createSlice({
       error: null,
       searchResults: {},
       todayWeathers: {},
-      fivedayWeathers: {},
+      // 날짜별 그룹화를 하기 위해서는 초기값이 null값이여야함
+      fivedayWeathers: null,
    },
    reducers: {},
    extraReducers: (builder) => {

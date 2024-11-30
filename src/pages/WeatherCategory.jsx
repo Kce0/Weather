@@ -38,17 +38,24 @@ function WeatherCategory({ category }) {
          </Wrap>
       )
    }
-   // 날짜별로 데이터를 그룹화 **공부**
-   const groupedByDate = fivedayWeathers.list.reduce((acc, day) => {
-      const date = day.dt_txt.split(' ')[0] // 날짜 부분만 추출 (YYYY-MM-DD 형식)
-      if (!acc[date]) {
-         acc[date] = day // 첫 번째 시간대의 데이터를 저장
-      }
-      return acc
-   }, {})
 
-   // 날짜별로 그룹화된 데이터의 값을 배열로 변환
-   const days = Object.values(groupedByDate)
+   // 렌더링을 다 한 후에 useEffect가 실행되기 때문에 아무것도 없는 상태에서 아래 코드를 실행하려고 하니 에러가 발생함.
+   // 그래서 if문을 사용해 null값일 때는 실행되지 않도록 만들어줌.
+   let days = []
+
+   // 날짜별로 데이터를 그룹화 **공부**
+   if (fivedayWeathers) {
+      const groupedByDate = fivedayWeathers.list.reduce((acc, day) => {
+         const date = day.dt_txt.split(' ')[0] // 날짜 부분만 추출 (YYYY-MM-DD 형식)
+         if (!acc[date]) {
+            acc[date] = day // 첫 번째 시간대의 데이터를 저장
+         }
+         return acc
+      }, {})
+
+      // 날짜별로 그룹화된 데이터의 값을 배열로 변환
+      days = Object.values(groupedByDate)
+   }
 
    return (
       <Wrap>

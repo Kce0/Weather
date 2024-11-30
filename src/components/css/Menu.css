@@ -1,58 +1,58 @@
 header {
-  header {
-    margin-bottom: 57px;
-  }
-  .search {
-    position: fixed;
-    background-color: #364057;
-    width: 100%;
-    height: 90px;
-    z-index: 99999;
-  }
+   header {
+      margin-bottom: 57px;
+   }
+   .search {
+      position: fixed;
+      background-color: #364057;
+      width: 100%;
+      height: 90px;
+      z-index: 99999;
+   }
 
-  ul {
-    width: 1400px;
-    margin: 0 auto;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
+   ul {
+      width: 1400px;
+      margin: 0 auto;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+   }
 
-  li a {
-    display: block;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    padding: 15px 20px;
-  }
+   li a {
+      display: block;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      padding: 15px 20px;
+   }
 
-  .Menu {
-    position: fixed;
-    width: 100%;
-    background-color: rgba(221, 221, 221, 0.5);
-    height: 50px;
-    top: 90px;
-    z-index: 99999;
-  }
+   .Menu {
+      position: fixed;
+      width: 100%;
+      background-color: rgba(221, 221, 221, 0.8);
+      height: 50px;
+      top: 90px;
+      z-index: 99999;
+   }
 
-  .Menu ul {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
+   .Menu ul {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+   }
 
-  .Menu li {
-    width: 300px;
-  }
+   .Menu li {
+      width: 300px;
+   }
 
-  .Menu li a {
-    color: rgb(78, 78, 78);
-    font-weight: 700;
-  }
+   .Menu li a {
+      color: black;
+      font-weight: 700;
+   }
 
-  .Menu li a:hover {
-    background-color: rgb(97, 99, 121);
-    color: white;
-  }
+   .Menu li a:hover {
+      background-color: rgb(97, 99, 121);
+      color: white;
+   }
 }
